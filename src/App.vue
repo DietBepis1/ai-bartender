@@ -1,28 +1,32 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class='app'>
+    <div class="app__title">
+      <h1>Ai Bartender</h1>
+    </div>
+    <div class='app__input'>
+      <DataInput v-on:ingredients-to-net='inputIngredients($event)'/>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import DataInput from './components/DataInput.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    DataInput
+  },
+  methods: {
+    inputIngredients(ingredients) {
+      console.log(ingredients);
+      //pass into brain.js later on
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+ @import './styles/globals.css';
+ @import './styles/App.css';
 </style>

@@ -1,0 +1,12 @@
+/*Global styling*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Source Code Pro', monospace;
+    line-height: 1.4;
+}

@@ -1,0 +1,19 @@
+/*Main app Styling*/
+
+.app {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+
+.app__title {
+    text-align: center;
+    grid-column: 6/8;
+}
+
+.app__input {
+    grid-column: 5/9;
+    grid-row: 3/5;
+    justify-self: center;
+    text-align: center;
+}
