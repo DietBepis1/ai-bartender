@@ -1,10 +1,16 @@
 <template>
     <div>
-        Add an ingredient and click submit.
-        <input v-model='ingredient'>
-        <button v-on:click='addIngredient(ingredient)'>Submit</button>
-        Submit Ingredients to AI:
-        <button v-on:click='emitIngredients(ingredients)'>Beep Boop</button>
+        <div>
+            Add an ingredient and click submit.
+            <input v-model='ingredient'>
+            <button v-on:click='addIngredient(ingredient)'>Submit</button>
+        </div>
+        <br>
+        <div>
+            Submit Ingredients to AI:
+            <button v-on:click='emitIngredients(ingredients)'>Beep Boop</button>
+        </div>
+        
         <hr/>
         You've added:
         {{ingredient}}

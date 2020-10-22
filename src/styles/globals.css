@@ -9,4 +9,5 @@
 body {
     font-family: 'Source Code Pro', monospace;
     line-height: 1.4;
+    overflow-x: hidden;
 }

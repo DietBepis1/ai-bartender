@@ -6,6 +6,7 @@
     <div class='app__input'>
       <DataInput v-on:ingredients-to-net='inputIngredients($event)'/>
     </div>
+    
   </div>
 </template>
 

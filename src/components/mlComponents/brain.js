@@ -1,29 +1,15 @@
 const brain = require('brain.js');
-const axios = require('axios');
+const trainingData = require('./trainingSet.js')
 
-/*
-const getData = () => {
-    axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-    .then(res => {
-        //console.log(res.data)
-        return Promise.resolve(res.data)
-
-    })
-    .catch(err => console.err(error))
+const params = {
+    hiddenlayers: [10, 7, 4],
+    activation: brain.Relu,
 }
 
-let data = getData();
-console.log(data);
+const net = new brain.NeuralNetwork();
 
-//console.log(data[0]);
-*/
-
-let data = null;
-
-let promise = axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-promise.then(res => {
-    //console.log(res.data);
-    data = res.data;
+net.train(trainingData, {
+    iterations: 10000,
+    errorThresh: 0.01,
+    log: stats => console.log(stats)
 })
-
-console.log(data);
