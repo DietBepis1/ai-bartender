@@ -20,11 +20,49 @@ export default {
   components: {
     DataInput
   },
+  data() {
+    return {
+      trainingData: trainingData
+    }
+  },
   methods: {
-    inputIngredients(ingredients) {
-      console.log(ingredients);
-      console.log(ml5.version);
-      console.log(trainingData);
+    inputIngredients(ingredients, trainingData) {
+
+      let input = [];
+      let output = [];
+
+      //set trainingdata to correct format
+      for(let prop of trainingData.prop) {
+        input.push(prop.input);
+        output.push(prop.output);
+      }
+
+      //set ml5 options
+      const options = {
+        task: 'classification',
+        debug: true
+      }
+
+      const trainingOptions = {
+        epochs: 32,
+        batchSize: 12
+      }
+
+      //create neural net and feed in data
+      const net = ml5.neuralNetwork(options);
+      net.addData(input, output);
+
+      //train it!
+      net.train(trainingOptions, () => {
+        net.classify(ingredients, (error, result) => {
+          if(error) {
+            console.error(error);
+          } else {
+            console.log(result);
+          }
+        }
+      )});
+
     }
   }
 }

@@ -12,7 +12,7 @@ for(const prop of data.drinks) {
     let newVal = 1;
 
     trainingSample.output[newKey] = newVal;
-    console.log(trainingSample);
+    //console.log(trainingSample);
     
     for(let i=1; i<=15; i++) {
         if(prop[`strIngredient${i}`]) {
@@ -26,3 +26,5 @@ for(const prop of data.drinks) {
 }
 
 export default trainingData;
+
+//console.log(trainingData);
