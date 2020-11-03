@@ -7,7 +7,7 @@
         </div>
         <br>
         <div>
-            Submit Ingredients to AI:
+            Submit Ingredients to your robo-bartender:
             <button v-on:click='emitIngredients(ingredients)'>Beep Boop</button>
         </div>
         

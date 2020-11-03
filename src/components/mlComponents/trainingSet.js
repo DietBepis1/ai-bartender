@@ -22445,30 +22445,5 @@ const data = {
     ]
 };
 
-const trainingData = {
-    input: [],
-    output: []
-};
 
-for(const prop of data.drinks) {
-    trainingData.output.push(prop.strDrink);
-    trainingData.input.push([
-        prop.strIngredient1,
-        prop.strIngredient2,
-        prop.strIngredient3,
-        prop.strIngredient4,
-        prop.strIngredient5,
-        prop.strIngredient6,
-        prop.strIngredient7,
-        prop.strIngredient8,
-        prop.strIngredient9,
-        prop.strIngredient10,
-        prop.strIngredient11,
-        prop.strIngredient12,
-        prop.strIngredient13,
-        prop.strIngredient14,
-        prop.strIngredient15,
-    ])
-}
-
-export default trainingData;
+exports.data = data;

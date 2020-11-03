@@ -1,15 +1,28 @@
-const brain = require('brain.js');
-const trainingData = require('./trainingSet.js')
+const { data } = require('./trainingSet.js');
 
-const params = {
-    hiddenlayers: [10, 7, 4],
-    activation: brain.Relu,
+let trainingData = [];
+
+for(const prop of data.drinks) {
+    let trainingSample = {
+        input: {},
+        output: {}
+    };
+
+    let newKey = `${prop.strDrink}`;
+    let newVal = 1;
+
+    trainingSample.output[newKey] = newVal;
+    console.log(trainingSample);
+    
+    for(let i=1; i<=15; i++) {
+        if(prop[`strIngredient${i}`]) {
+            let value = prop[`strIngredient${i}`];
+            trainingSample.input[value] = 1;
+        }
+    }
+    
+    trainingData.push(trainingSample);
+    
 }
 
-const net = new brain.NeuralNetwork();
-
-net.train(trainingData, {
-    iterations: 10000,
-    errorThresh: 0.01,
-    log: stats => console.log(stats)
-})
+export default trainingData;
