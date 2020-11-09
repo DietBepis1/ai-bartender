@@ -6,6 +6,11 @@
     <div class='app__input'>
       <DataInput v-on:ingredients-to-net='inputIngredients($event)'/>
     </div>
+
+    <div class='app_train'>
+      Click to train net
+      <button v-on:click='trainNetwork(trainingInput, trainingOutput, ingredients)'>TRAIN</button>
+    </div>
     
   </div>
 </template>
@@ -13,7 +18,7 @@
 <script>
 import DataInput from './components/DataInput.vue';
 import ml5 from 'ml5';
-import { trainingData } from './components/mlComponents/brain.js';
+import { data } from './components/mlComponents/trainingSet.js';
 
 export default {
   name: 'App',
@@ -22,47 +27,68 @@ export default {
   },
   data() {
     return {
-      trainingData: trainingData
+      data: data,
+      trainingInput: [],
+      trainingOutput: [],
+      ingredients: null
     }
   },
   methods: {
-    inputIngredients(ingredients, trainingData) {
+    prepData(data) {
+      //preps api data for ml5
+      for(const prop of data.drinks) {
+        let input = {};
+        let output = {};
 
-      let input = [];
-      let output = [];
-
-      //set trainingdata to correct format
-      for(let prop of trainingData.prop) {
-        input.push(prop.input);
-        output.push(prop.output);
+        output[prop.strDrink] = 1;
+        
+        for(let i=1; i<=15; i++) {
+          if(prop[`strIngredient${i}`]) {
+            let value = prop[`strIngredient${i}`];
+            input[value] = 1;
+          }
+        }
+        
+        this.trainingInput.push(input);
+        this.trainingOutput.push(output);       
       }
+    },
+    inputIngredients(ingredients) {
+      
+      this.prepData(this.data);
+      this.ingredients = ingredients;
+      console.log('process completed!')
 
-      //set ml5 options
+    },
+    trainNetwork(input, output, ingredients) {
+      //this method will train the network after data is prepped
+
+      //first, set options and training options
       const options = {
         task: 'classification',
-        debug: true
-      }
-
+        debug: 'true',
+      };
       const trainingOptions = {
         epochs: 32,
         batchSize: 12
-      }
+      };
 
-      //create neural net and feed in data
+      //next, initialize network and add data
       const net = ml5.neuralNetwork(options);
       net.addData(input, output);
 
-      //train it!
-      net.train(trainingOptions, () => {
-        net.classify(ingredients, (error, result) => {
-          if(error) {
-            console.error(error);
-          } else {
-            console.log(result);
-          }
+      //third, train that net and make predictions!
+      net.train(trainingOptions, ()=> {
+        net.classify(ingredients, (err, res) => {
+        if(err) {
+          console.log(err);
+        } else {
+          console.log(`Result is ${res}`);
+          return res;
         }
-      )});
-
+        });
+      }
+    )
     }
   }
 }

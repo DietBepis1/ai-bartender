@@ -14,3 +14,7 @@ If you want to clone this repo, you can run the dev server and build commands li
 Update 1.0.1
 Changed from Brain.js to Ml5.js and moved implementation of Ml5.js to App.vue.
 This should solve an issue I had with creating an ml5 instance.
+
+Update 1.0.11
+Started rewriting the code for importing the training data into the DOM and the code for
+training the network.

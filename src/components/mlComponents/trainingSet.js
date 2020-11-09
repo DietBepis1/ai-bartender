@@ -1,6 +1,6 @@
 /*This file contains the raw data from TheCoctailDB's public API. */
 
-const data = {
+export const data = {
     "drinks": [
         {
             "idDrink": "17222",
@@ -22444,6 +22444,3 @@ const data = {
         }
     ]
 };
-
-
-exports.data = data;
